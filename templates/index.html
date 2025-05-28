@@ -135,6 +135,12 @@
 
         <label for="velocidad">Velocidad de Enfriamiento:</label>
         <input type="number" step="0.01" name="velocidad" id="velocidad" required placeholder="Ejemplo: 0.95" />
+        
+        <label for="num_iteraciones">Número de Iteraciones:</label>
+        <input type="number" name="num_iteraciones" id="num_iteraciones" min="1" required placeholder="Ejemplo: 1000" />
+
+        <label for="tamano_lista_tabu">Tamaño de la Lista Tabú:</label>
+        <input type="number" name="tamano_lista_tabu" id="tamano_lista_tabu" min="1" required placeholder="Ejemplo: 10" />
 
         <button type="submit">Calcular Mejor Ruta</button>
     </form>
@@ -164,6 +170,8 @@
         <p><strong>Temperatura Inicial:</strong> {{ resultado.temp_inicial }}</p>
         <p><strong>Temperatura Mínima:</strong> {{ resultado.temp_minima }}</p>
         <p><strong>Velocidad de Enfriamiento:</strong> {{ resultado.velocidad }}</p>
+        <p><strong>Número de Iteraciones:</strong> {{ resultado.num_iteraciones }}</p>
+        <p><strong>Tamaño de la Lista Tabú:</strong> {{ resultado.tamano_lista_tabu }}</p>
     </div>
     {% endif %}
 </body>
