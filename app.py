@@ -64,6 +64,8 @@ def index():
         temp_inicial = float(request.form.get('temp_inicial'))
         temp_minima = float(request.form.get('temp_minima'))
         velocidad = float(request.form.get('velocidad'))
+        num_iteraciones = int(request.form.get('num_iteraciones'))
+        tamano_lista_tabu = int(request.form.get('tamano_lista_tabu'))
 
         # Crear ruta inicial excluyendo origen y destino, y luego armar ruta con origen al inicio y destino al final
         ciudades_ruta = list(COORDENADAS.keys())
@@ -72,15 +74,20 @@ def index():
         random.shuffle(ciudades_ruta)
         ruta_inicial = [origen] + ciudades_ruta + [destino]
 
-        # Aquí podrías usar los parámetros de temp si quieres, pero para búsqueda tabú los ignoramos por ahora
-        mejor_ruta = busqueda_tabu(ruta_inicial, COORDENADAS, max_iteraciones=200, memoria_tabu_tamano=15)
+        mejor_ruta = busqueda_tabu(
+            ruta_inicial, COORDENADAS,
+            max_iteraciones=num_iteraciones,
+            memoria_tabu_tamano=tamano_lista_tabu
+        )
         distancia_total = evalua_ruta(mejor_ruta, COORDENADAS)
         resultado = {
             'ruta': mejor_ruta,
             'distancia': distancia_total,
             'temp_inicial': temp_inicial,
             'temp_minima': temp_minima,
-            'velocidad': velocidad
+            'velocidad': velocidad,
+            'num_iteraciones': num_iteraciones,
+            'tamano_lista_tabu': tamano_lista_tabu
         }
 
     return render_template('index.html', ciudades=COORDENADAS.keys(), resultado=resultado)
